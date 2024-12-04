@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../includes/pipex.h"
 
 char	*getcmd_path(char *cmd, char **envar)
 {
@@ -55,7 +55,7 @@ void	execmd(char *argv, char **envar)
 
 	ind = -1;
 	cmd = ft_split(argv, ' ');
-	finpath = ft_getcmd_path(cmd[0], envar);
+	finpath = getcmd_path(cmd[0], envar);
 	if (!finpath)
 	{
 		while (cmd[++ind])
