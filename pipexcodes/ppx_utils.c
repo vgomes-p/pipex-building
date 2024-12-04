@@ -12,90 +12,84 @@
 
 #include "../includes/pipex.h"
 
-/* Function that will look for the path line inside the environment, will
- split and test each command path and then return the right one. */
-char	*find_path(char *cmd, char **envp)
+char	*ft_getcmd_path(char *cmd, char **envar)
 {
-	char	**paths;
-	char	*path;
-	int		cnt;
-	char	*part_path;
+	char	**cmdpath;
+	char	*finpath;
+	int		ind;
+	char	*parpatd;
 
-	cnt = 0;
-	while (ft_strnstr(envp[cnt], "PATH", 4) == 0)
-		cnt++;
-	paths = ft_split(envp[cnt] + 5, ':');
-	cnt = 0;
-	while (paths[cnt])
+	ind = 0;
+	while (ft_strnstr(envar[ind], "PATH", 4) == 0)
+		ind++;
+	cmdpath = ft_split(envar[ind] + 5, ':');
+	ind = 0;
+	while (cmdpath[ind])
 	{
-		part_path = ft_strjoin(paths[cnt], "/");
-		path = ft_strjoin(part_path, cmd);
-		free(part_path);
-		if (access(path, F_OK) == 0)
-			return (path);
-		free(path);
-		cnt++;
+		parpatd = ft_strjoin(cmdpath[ind], "/");
+		finpath = ft_strjoin(parpatd, cmd);
+		free(parpatd);
+		if (access(finpath, F_OK) == 0)
+			return (finpath);
+		free(finpath);
+		ind++;
 	}
-	cnt = -1;
-	while (paths[++cnt])
-		free(paths[cnt]);
-	free(paths);
+	ind = -1;
+	while (cmdpath[++ind])
+		free(cmdpath[ind]);
+	free(cmdpath);
 	return (0);
 }
 
-/* A simple error displaying function. */
-void	error(void)
+void	exiterror(void)
 {
 	perror("\033[31mError");
 	exit(EXIT_FAILURE);
 }
 
-/* Function that take the command and send it to find_path
- before executing it. */
-void	execute(char *argv, char **envp)
+void	execmd(char *argv, char **envar)
 {
 	char	**cmd;
 	int		ind;
-	char	*path;
+	char	*finpath;
 
 	ind = -1;
 	cmd = ft_split(argv, ' ');
-	path = find_path(cmd[0], envp);
-	if (!path)
+	finpath = ft_getcmd_path(cmd[0], envar);
+	if (!finpath)
 	{
 		while (cmd[++ind])
 			free(cmd[ind]);
 		free(cmd);
-		error();
+		exiterror();
 	}
-	if (execve(path, cmd, envp) == -1)
-		error();
+	if (execve(finpath, cmd, envar) == -1)
+		exiterror();
 }
 
-/* Function that will read input from the terminal and return line. */
 int	get_next_line(char **line)
 {
 	char	*buff;
-	int		cnt0;
-	int		cnt1;
+	int		ind0;
+	int		ind1;
 	char	ch;
 
-	cnt0 = 0;
-	cnt1 = 0;
+	ind0 = 0;
+	ind1 = 0;
 	buff = (char *)malloc(10000);
 	if (!buff)
 		return (-1);
-	cnt1 = read(0, &ch, 1);
-	while (cnt1 && ch != '\n' && ch != '\0')
+	ind1 = read(0, &ch, 1);
+	while (ind1 && ch != '\n' && ch != '\0')
 	{
 		if (ch != '\n' && ch != '\0')
-			buff[cnt0] = ch;
-		cnt0++;
-		cnt1 = read(0, &ch, 1);
+			buff[ind0] = ch;
+		ind0++;
+		ind1 = read(0, &ch, 1);
 	}
-	buff[cnt0] = '\n';
-	buff[++cnt0] = '\0';
+	buff[ind0] = '\n';
+	buff[++ind0] = '\0';
 	*line = buff;
 	free(buff);
-	return (cnt1);
+	return (ind1);
 }

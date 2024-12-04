@@ -12,59 +12,53 @@
 
 #include "../includes/pipex.h"
 
-/* Child process that run inside a fork, take the filein, put the output inside
- a pipe and then close with the exec function */
-void	child_process(char **argv, char **envp, int *fd)
+void	low_process(char **argv, char **envar, int *fd)
 {
-	int		filein;
+	int		file_inp;
 
-	filein = open(argv[1], O_RDONLY, 0777);
-	if (filein == -1)
-		error();
+	file_inp = open(argv[1], O_RDONLY, 0777);
+	if (file_inp == -1)
+		exiterror();
 	dup2(fd[1], STDOUT_FILENO);
-	dup2(filein, STDIN_FILENO);
+	dup2(file_inp, STDIN_FILENO);
 	close(fd[0]);
-	execute(argv[2], envp);
+	execmd(argv[2], envar);
 }
 
-/* Parent process that take the data from the pipe, change the output for the
- fileout and also close with the exec function */
-void	parent_process(char **argv, char **envp, int *fd)
+void	upper_process(char **argv, char **envar, int *fd)
 {
-	int		fileout;
+	int		file_outp;
 
-	fileout = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fileout == -1)
-		error();
+	file_outp = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (file_outp == -1)
+		exiterror();
 	dup2(fd[0], STDIN_FILENO);
-	dup2(fileout, STDOUT_FILENO);
+	dup2(file_outp, STDOUT_FILENO);
 	close(fd[1]);
-	execute(argv[3], envp);
+	execmd(argv[3], envar);
 }
 
-/* Main function that run the child and parent process or display an error
- message if arguments are wrong */
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envar)
 {
 	int		fd[2];
-	pid_t	pid1;
+	pid_t	lppid;
 
 	if (argc == 5)
 	{
 		if (pipe(fd) == -1)
-			error();
-		pid1 = fork();
-		if (pid1 == -1)
-			error();
-		if (pid1 == 0)
-			child_process(argv, envp, fd);
-		waitpid(pid1, NULL, 0);
-		parent_process(argv, envp, fd);
+			exiterror();
+		lppid = fork();
+		if (lppid == -1)
+			exiterror();
+		if (lppid == 0)
+			low_process(argv, envar, fd);
+		waitpid(lppid, NULL, 0);
+		parent_process(argv, envar, fd);
 	}
 	else
 	{
-		ft_putstr_fd("\033[31mError: Bad arguments\n\e[0m", 2);
-		ft_putstr_fd("Ex: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+		ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
+		ft_putstr_fd("Ex: ./pipex <input_file> <cmd1> <cmd2> <output_file>\n", 1);
 	}
 	return (0);
 }

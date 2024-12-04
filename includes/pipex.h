@@ -23,14 +23,14 @@
 # include "../libft/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
-void	child_process(char **argv, char **envp, int *fd);
-void	parent_process(char **argv, char **envp, int *fd);
-int		main(int argc, char **argv, char **envp);
+void	low_process(char **argv, char **envar, int *fd);
+void	upper_process(char **argv, char **envar, int *fd);
+int		main(int argc, char **argv, char **envar);
 
 /* FUNCTIONS ON PPX_UTILS.C */
-void	error(void);
-char	*find_path(char *cmd, char **envp);
+char	*ft_getcmd_path(char *cmd, char **envar);
+void	exiterror(void);
+void	execmd(char *argv, char **envar);
 int		get_next_line(char **line);
-void	execute(char *argv, char **envp);
 
 #endif
