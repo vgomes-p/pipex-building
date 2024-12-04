@@ -12,12 +12,12 @@
 
 #include "../includes/pipex.h"
 
-char	*ft_getcmd_path(char *cmd, char **envar)
+char	*getcmd_path(char *cmd, char **envar)
 {
 	char	**cmdpath;
-	char	*finpath;
+	char	*fullpath;
 	int		ind;
-	char	*parpatd;
+	char	*partialpath;
 
 	ind = 0;
 	while (ft_strnstr(envar[ind], "PATH", 4) == 0)
@@ -26,12 +26,12 @@ char	*ft_getcmd_path(char *cmd, char **envar)
 	ind = 0;
 	while (cmdpath[ind])
 	{
-		parpatd = ft_strjoin(cmdpath[ind], "/");
-		finpath = ft_strjoin(parpatd, cmd);
-		free(parpatd);
-		if (access(finpath, F_OK) == 0)
-			return (finpath);
-		free(finpath);
+		partialpath = ft_strjoin(cmdpath[ind], "/");
+		fullpath = ft_strjoin(partialpath, cmd);
+		free(partialpath);
+		if (access(fullpath, F_OK) == 0)
+			return (fullpath);
+		free(fullpath);
 		ind++;
 	}
 	ind = -1;
@@ -41,7 +41,7 @@ char	*ft_getcmd_path(char *cmd, char **envar)
 	return (0);
 }
 
-void	exiterror(void)
+void	errorexit(void)
 {
 	perror("\033[31mError");
 	exit(EXIT_FAILURE);
@@ -61,10 +61,10 @@ void	execmd(char *argv, char **envar)
 		while (cmd[++ind])
 			free(cmd[ind]);
 		free(cmd);
-		exiterror();
+		errorexit();
 	}
 	if (execve(finpath, cmd, envar) == -1)
-		exiterror();
+		errorexit();
 }
 
 int	get_next_line(char **line)
@@ -92,4 +92,10 @@ int	get_next_line(char **line)
 	*line = buff;
 	free(buff);
 	return (ind1);
+}
+
+void	print_usage(void)
+{
+	ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
+	ft_putstr_fd("Usage: ./pipex <infile> <cmd1> <cmd2> <outfile>\n", 1);
 }

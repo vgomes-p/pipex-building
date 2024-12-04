@@ -28,9 +28,10 @@ void	upper_process(char **argv, char **envar, int *fd);
 int		main(int argc, char **argv, char **envar);
 
 /* FUNCTIONS ON PPX_UTILS.C */
-char	*ft_getcmd_path(char *cmd, char **envar);
-void	exiterror(void);
+char	*getcmd_path(char *cmd, char **envar);
+void	errorexit(void);
 void	execmd(char *argv, char **envar);
 int		get_next_line(char **line);
+void	print_usage(void);
 
 #endif

@@ -14,26 +14,26 @@
 
 void	low_process(char **argv, char **envar, int *fd)
 {
-	int		file_inp;
+	int		infile;
 
-	file_inp = open(argv[1], O_RDONLY, 0777);
-	if (file_inp == -1)
-		exiterror();
+	infile = open(argv[1], O_RDONLY, 0777);
+	if (infile == -1)
+		errorexit();
 	dup2(fd[1], STDOUT_FILENO);
-	dup2(file_inp, STDIN_FILENO);
+	dup2(infile, STDIN_FILENO);
 	close(fd[0]);
 	execmd(argv[2], envar);
 }
 
 void	upper_process(char **argv, char **envar, int *fd)
 {
-	int		file_outp;
+	int		outfile;
 
-	file_outp = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (file_outp == -1)
-		exiterror();
+	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (outfile == -1)
+		errorexit();
 	dup2(fd[0], STDIN_FILENO);
-	dup2(file_outp, STDOUT_FILENO);
+	dup2(outfile, STDOUT_FILENO);
 	close(fd[1]);
 	execmd(argv[3], envar);
 }
@@ -43,22 +43,19 @@ int	main(int argc, char **argv, char **envar)
 	int		fd[2];
 	pid_t	lppid;
 
-	if (argc == 5)
+	if (argc != 5)
 	{
-		if (pipe(fd) == -1)
-			exiterror();
-		lppid = fork();
-		if (lppid == -1)
-			exiterror();
-		if (lppid == 0)
-			low_process(argv, envar, fd);
-		waitpid(lppid, NULL, 0);
-		parent_process(argv, envar, fd);
+		print_usage();
+		return (1);
 	}
-	else
-	{
-		ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
-		ft_putstr_fd("Ex: ./pipex <infile> <cmd1> <cmd2> <outfile>\n", 1);
-	}
+	if (pipe(fd) == -1)
+		errorexit();
+	lppid = fork();
+	if (lppid == -1)
+		errorexit();
+	if (lppid == 0)
+		low_process(argv, envar, fd);
+	waitpid(lppid, NULL, 0);
+	upper_process(argv, envar, fd);
 	return (0);
 }
