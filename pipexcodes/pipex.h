@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include "../libftplus/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
 void	low_process(char **argv, char **envar, int *fd);
@@ -31,7 +31,7 @@ int		main(int argc, char **argv, char **envar);
 char	*getcmd_path(char *cmd, char **envar);
 void	errorexit(void);
 void	execmd(char *argv, char **envar);
-int		get_next_line(char **line);
+// int		get_next_line(char **line);
 void	print_usage(void);
 
 #endif

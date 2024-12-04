@@ -20,7 +20,7 @@ H_SRCS		=	pipex.h
 H_DIR		=	includes/
 HEADER		=	$(addprefix $(H_DIR), $(H_SRCS))
 
-MAPA_SRCS	=	pipex.c ppx_utils.c
+MAPA_SRCS	=	pipex.c ppx_utils.c pipex.h
 MAPA_DIR	=	pipexcodes/
 MAPA		=	$(addprefix $(MAPA_DIR), $(MAPA_SRCS))
 OBJ_M		=	$(MAPA:.c=.o)
