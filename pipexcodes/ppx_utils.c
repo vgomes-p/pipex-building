@@ -18,27 +18,27 @@ char	*find_path(char *cmd, char **envp)
 {
 	char	**paths;
 	char	*path;
-	int		i;
+	int		cnt;
 	char	*part_path;
 
-	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
-		i++;
-	paths = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (paths[i])
+	cnt = 0;
+	while (ft_strnstr(envp[cnt], "PATH", 4) == 0)
+		cnt++;
+	paths = ft_split(envp[cnt] + 5, ':');
+	cnt = 0;
+	while (paths[cnt])
 	{
-		part_path = ft_strjoin(paths[i], "/");
+		part_path = ft_strjoin(paths[cnt], "/");
 		path = ft_strjoin(part_path, cmd);
 		free(part_path);
 		if (access(path, F_OK) == 0)
 			return (path);
 		free(path);
-		i++;
+		cnt++;
 	}
-	i = -1;
-	while (paths[++i])
-		free(paths[i]);
+	cnt = -1;
+	while (paths[++cnt])
+		free(paths[cnt]);
 	free(paths);
 	return (0);
 }
@@ -55,16 +55,16 @@ void	error(void)
 void	execute(char *argv, char **envp)
 {
 	char	**cmd;
-	int		i;
+	int		ind;
 	char	*path;
 
-	i = -1;
+	ind = -1;
 	cmd = ft_split(argv, ' ');
 	path = find_path(cmd[0], envp);
 	if (!path)
 	{
-		while (cmd[++i])
-			free(cmd[i]);
+		while (cmd[++ind])
+			free(cmd[ind]);
 		free(cmd);
 		error();
 	}
@@ -75,27 +75,27 @@ void	execute(char *argv, char **envp)
 /* Function that will read input from the terminal and return line. */
 int	get_next_line(char **line)
 {
-	char	*buffer;
-	int		i;
-	int		r;
-	char	c;
+	char	*buff;
+	int		cnt0;
+	int		cnt1;
+	char	ch;
 
-	i = 0;
-	r = 0;
-	buffer = (char *)malloc(10000);
-	if (!buffer)
+	cnt0 = 0;
+	cnt1 = 0;
+	buff = (char *)malloc(10000);
+	if (!buff)
 		return (-1);
-	r = read(0, &c, 1);
-	while (r && c != '\n' && c != '\0')
+	cnt1 = read(0, &ch, 1);
+	while (cnt1 && ch != '\n' && ch != '\0')
 	{
-		if (c != '\n' && c != '\0')
-			buffer[i] = c;
-		i++;
-		r = read(0, &c, 1);
+		if (ch != '\n' && ch != '\0')
+			buff[cnt0] = ch;
+		cnt0++;
+		cnt1 = read(0, &ch, 1);
 	}
-	buffer[i] = '\n';
-	buffer[++i] = '\0';
-	*line = buffer;
-	free(buffer);
-	return (r);
+	buff[cnt0] = '\n';
+	buff[++cnt0] = '\0';
+	*line = buff;
+	free(buff);
+	return (cnt1);
 }

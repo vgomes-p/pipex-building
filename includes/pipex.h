@@ -12,6 +12,7 @@
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
 /* INCLUDES */
 # include <stdlib.h>
 # include <unistd.h>
@@ -21,7 +22,12 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 
-/* ppx_utils.c functions */
+/* FUNCTIONS ON PIPEX.C */
+void	child_process(char **argv, char **envp, int *fd);
+void	parent_process(char **argv, char **envp, int *fd);
+int		main(int argc, char **argv, char **envp);
+
+/* FUNCTIONS ON PPX_UTILS.C */
 void	error(void);
 char	*find_path(char *cmd, char **envp);
 int		get_next_line(char **line);

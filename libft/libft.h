@@ -13,9 +13,11 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+/* INCLUDES */
 # include <stdlib.h>
 # include <unistd.h>
 
+/* LIBFT FUNCTIONS */
 int		ft_isalpha(int ch);
 int		ft_isdigit(int dig);
 int		ft_isalnum(int chdig);
@@ -50,5 +52,7 @@ void	ft_putchar_fd(char ch, int fd);
 void	ft_putstr_fd(char *str, int fd);
 void	ft_putendl_fd(char *str, int fd);
 void	ft_putnbr_fd(int num, int fd);
+
+/* ADDITIONAL FUNCTIONS */
 
 #endif
