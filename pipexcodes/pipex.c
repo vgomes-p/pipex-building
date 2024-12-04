@@ -58,7 +58,7 @@ int	main(int argc, char **argv, char **envar)
 	else
 	{
 		ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
-		ft_putstr_fd("Ex: ./pipex <input_file> <cmd1> <cmd2> <output_file>\n", 1);
+		ft_putstr_fd("Ex: ./pipex <infile> <cmd1> <cmd2> <outfile>\n", 1);
 	}
 	return (0);
 }
