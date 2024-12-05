@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgomes-p <vgomes-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 12:54:00 by vgomes-p          #+#    #+#             */
-/*   Updated: 2024/11/07 12:54:00 by vgomes-p         ###   ########.fr       */
+/*   Created: 2024/11/07 12:57:07 by vgomes-p          #+#    #+#             */
+/*   Updated: 2024/11/07 12:57:07 by vgomes-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-int	ft_isascii(int var)
-{
-	if (var >= 0 && var <= 127)
-		return (1);
-	else
-		return (0);
-}
+/* INCLUDES */
+# include <stdlib.h>
+# include <unistd.h>
+
+/* FROM LIBFT */
+char	*ft_strnstr(const char *big, const char *ltl, size_t lench);
+char	*ft_strjoin(char const *str0, char const *str1);
+char	**ft_split(char const *str, char ch);
+void	ft_putstr_fd(char *str, int fd);
+
+
+#endif
