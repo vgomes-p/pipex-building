@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envar)
 		errorexit();
 	if (lppid == 0)
 		low_process(argv, envar, fd);
-	waitpid(lppid, NULL, 0);
+	waitpid(lppid, NULL, 0); /*criar uma função que coloque um limite para o retorno do filho, se bater esse tempo, continue o processo*/
 	upper_process(argv, envar, fd);
 	return (0);
 }
