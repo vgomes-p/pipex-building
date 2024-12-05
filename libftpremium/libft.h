@@ -61,14 +61,14 @@ void	ft_putnbr_fd(int num, int fd);
 /* OTHERS */
 	/* GET_NEXT_LINE */
 		/* FUNCTIONS ON GET_NEXT_LINE.C */
-// char	*ft_read(int fd, char *store);
-// char	*ft_currline(char *store);
-// char	*ft_trimline(char *store);
-// char	*get_next_line(int fd);
-// 		/* FUNCTIONS ON GET_NEXT_LINE_UTILS.C */
-// size_t	ft_strlen(const char *var);
-// char	*ft_strchr_mod(char const *str, int ch);
-// char	*ft_strjoin_mod(char *str0, char *str1);
-// char	*ft_substr_mod(char const *str, unsigned int start, size_t len);
+char	*ft_read(int fd, char *store);
+char	*ft_currline(char *store);
+char	*ft_trimline(char *store);
+char	*get_next_line(int fd);
+		/* FUNCTIONS ON GET_NEXT_LINE_UTILS.C */
+size_t	ft_strlen(const char *var);
+char	*ft_strchr_mod(char const *str, int ch);
+char	*ft_strjoin_mod(char *str0, char *str1);
+char	*ft_substr_mod(char const *str, unsigned int start, size_t len);
 
 #endif

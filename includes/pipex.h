@@ -23,6 +23,7 @@
 # include "../libftpremium/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
+int		open_file(char *fname, int flags);
 void	low_process(char **argv, char **envar, int *fd);
 void	upper_process(char **argv, char **envar, int *fd);
 int		main(int argc, char **argv, char **envar);
@@ -30,8 +31,8 @@ int		main(int argc, char **argv, char **envar);
 /* FUNCTIONS ON PPX_UTILS.C */
 char	*getcmd_path(char *cmd, char **envar);
 void	errorexit(void);
+void	ft_free_split(char **split);
 void	execmd(char *argv, char **envar);
-// int		get_next_line(char **line);
 void	print_usage(void);
 
 #endif

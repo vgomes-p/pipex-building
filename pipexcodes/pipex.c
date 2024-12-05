@@ -12,32 +12,42 @@
 
 #include "../includes/pipex.h"
 
+//function 00
+int	open_file(char *fname, int flags)
+{
+	int	fd;
+
+	fd = open(fname, flags, 0777);
+	if (fd == -1)
+		errorexit();
+	return (fd);
+}
+
+//function 01
 void	low_process(char **argv, char **envar, int *fd)
 {
 	int		infile;
 
-	infile = open(argv[1], O_RDONLY, 0777);
-	if (infile == -1)
-		errorexit();
+	infile = open_file(argv[1], O_RDONLY);
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(infile, STDIN_FILENO);
 	close(fd[0]);
 	execmd(argv[2], envar);
 }
 
+//function 02
 void	upper_process(char **argv, char **envar, int *fd)
 {
 	int		outfile;
 
-	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (outfile == -1)
-		errorexit();
+	outfile = open_file(argv[4], O_WRONLY | O_CREAT | O_TRUNC);
 	dup2(fd[0], STDIN_FILENO);
 	dup2(outfile, STDOUT_FILENO);
 	close(fd[1]);
 	execmd(argv[3], envar);
 }
 
+//function 03
 int	main(int argc, char **argv, char **envar)
 {
 	int		fd[2];

@@ -12,6 +12,7 @@
 
 #include "../includes/pipex.h"
 
+//function 00
 char	*getcmd_path(char *cmd, char **envar)
 {
 	char	**cmdpath;
@@ -41,12 +42,28 @@ char	*getcmd_path(char *cmd, char **envar)
 	return (0);
 }
 
+//function 01
 void	errorexit(void)
 {
 	perror("\033[31mError");
 	exit(EXIT_FAILURE);
 }
 
+//function 02
+void	ft_free_split(char **split)
+{
+	int	ind;
+
+	ind = 0;
+	while (split[ind])
+	{
+		free(split[ind]);
+		ind++;
+	}
+	free(split);
+}
+
+//function 03
 void	execmd(char *argv, char **envar)
 {
 	char	**cmd;
@@ -58,42 +75,17 @@ void	execmd(char *argv, char **envar)
 	finpath = getcmd_path(cmd[0], envar);
 	if (!finpath)
 	{
-		while (cmd[++ind])
-			free(cmd[ind]);
-		free(cmd);
+		ft_free_split(cmd);
 		errorexit();
 	}
 	if (execve(finpath, cmd, envar) == -1)
-		errorexit();
-}
-
-int	get_next_line(char **line)
-{
-	char	*buff;
-	int		ind0;
-	int		ind1;
-	char	ch;
-
-	ind0 = 0;
-	ind1 = 0;
-	buff = (char *)malloc(10000);
-	if (!buff)
-		return (-1);
-	ind1 = read(0, &ch, 1);
-	while (ind1 && ch != '\n' && ch != '\0')
 	{
-		if (ch != '\n' && ch != '\0')
-			buff[ind0] = ch;
-		ind0++;
-		ind1 = read(0, &ch, 1);
+		ft_free_split(cmd);
+		errorexit();
 	}
-	buff[ind0] = '\n';
-	buff[++ind0] = '\0';
-	*line = buff;
-	free(buff);
-	return (ind1);
 }
 
+//function 04
 void	print_usage(void)
 {
 	ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
