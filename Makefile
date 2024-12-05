@@ -38,7 +38,7 @@ $(OBJ_DIR)%.o: $(MAPA_DIR)%.c $(HEADER)
 
 $(NAME): $(OBJ_M) $(LIBFT)
 			$(CC) $(FLAGS) $(OBJ_M) $(LIBFT) -o $(NAME)
-			@echo -e "$(GREEN)$(NAME) created!$(DEFAULT)"
+			@echo -e "$(GREEN)execution completed $(NAME) created!$(DEFAULT)"
 
 $(LIBFT):
 			@make -C $(LIBFT_DIR)
@@ -48,12 +48,12 @@ all:		$(NAME)
 clean:
 			@$(RM) $(OBJ_M)
 			@make clean -C $(LIBFT_DIR)
-			@echo -e "$(YELLOW)object files deleted!$(DEFAULT)"
+			@echo -e "$(YELLOW)execution completed!$(DEFAULT)"
 
 fclean: clean
 			@$(RM) $(NAME)
 			@make fclean -C $(LIBFT_DIR)
-			@echo -e "$(RED)all deleted!$(DEFAULT)"
+			@echo -e "$(RED)all execution completed!$(DEFAULT)"
 
 re:			fclean all
 
