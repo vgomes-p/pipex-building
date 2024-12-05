@@ -50,20 +50,6 @@ void	errorexit(void)
 }
 
 //function 02
-void	ft_free_split(char **split)
-{
-	int	ind;
-
-	ind = 0;
-	while (split[ind])
-	{
-		free(split[ind]);
-		ind++;
-	}
-	free(split);
-}
-
-//function 03
 void	execmd(char *argv, char **envar)
 {
 	char	**cmd;
@@ -75,17 +61,16 @@ void	execmd(char *argv, char **envar)
 	finpath = getcmd_path(cmd[0], envar);
 	if (!finpath)
 	{
-		ft_free_split(cmd);
+		while (cmd[++ind])
+			free(cmd[ind]);
+		free(cmd);
 		errorexit();
 	}
 	if (execve(finpath, cmd, envar) == -1)
-	{
-		ft_free_split(cmd);
 		errorexit();
-	}
 }
 
-//function 04
+//function 03
 void	print_usage(void)
 {
 	ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);

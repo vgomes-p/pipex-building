@@ -31,7 +31,6 @@ int		main(int argc, char **argv, char **envar);
 /* FUNCTIONS ON PPX_UTILS.C */
 char	*getcmd_path(char *cmd, char **envar);
 void	errorexit(void);
-void	ft_free_split(char **split);
 void	execmd(char *argv, char **envar);
 void	print_usage(void);
 
