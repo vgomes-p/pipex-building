@@ -27,7 +27,7 @@ OBJ_M		=	$(addprefix $(OBJ_DIR), $(notdir $(MAPA:.c=.o)))
 
 MAPA		=	$(addprefix $(MAPA_DIR), $(MAPA_SRCS))
 
-LIBFT_DIR	=	libftpremium/
+LIBFT_DIR	=	libft/
 LIBFT		=	$(LIBFT_DIR)libft.a
 
 # Rules

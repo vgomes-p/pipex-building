@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../libftpremium/libft.h"
+# include "../libft/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
 int		open_file(char *fname, int flags);
