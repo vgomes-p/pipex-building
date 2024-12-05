@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
-# include "../libftplus/libft.h"
+# include "../libftpremium/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
 void	low_process(char **argv, char **envar, int *fd);

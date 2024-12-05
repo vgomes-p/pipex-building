@@ -15,22 +15,26 @@ CC			=	gcc
 FLAGS		=	-Wall -Wextra -Werror -I $(H_DIR) -I $(LIBFT_DIR)
 RM			=	rm -rf
 
-# Caminhos e arquivos
+# path and files
 H_SRCS		=	pipex.h
 H_DIR		=	includes/
 HEADER		=	$(addprefix $(H_DIR), $(H_SRCS))
 
 MAPA_SRCS	=	pipex.c ppx_utils.c
 MAPA_DIR	=	pipexcodes/
-MAPA		=	$(addprefix $(MAPA_DIR), $(MAPA_SRCS))
-OBJ_M		=	$(MAPA:.c=.o)
+OBJ_DIR		=	build/
+OBJ_M		=	$(addprefix $(OBJ_DIR), $(notdir $(MAPA:.c=.o)))
 
-LIBFT_DIR	=	libftplus/
+MAPA		=	$(addprefix $(MAPA_DIR), $(MAPA_SRCS))
+
+LIBFT_DIR	=	libftpremium/
 LIBFT		=	$(LIBFT_DIR)libft.a
 
-# Regras de compilação
-%.o: %.c $(HEADER) Makefile
+# Rules
+$(OBJ_DIR)%.o: $(MAPA_DIR)%.c $(HEADER)
+			@mkdir -p $(OBJ_DIR)
 			$(CC) $(FLAGS) -c $< -o $@
+			
 
 $(NAME): $(OBJ_M) $(LIBFT)
 			$(CC) $(FLAGS) $(OBJ_M) $(LIBFT) -o $(NAME)
