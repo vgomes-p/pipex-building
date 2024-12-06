@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <signal.h>
 # include "../libft/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
@@ -33,5 +34,7 @@ char	*getcmd_path(char *cmd, char **envar);
 void	errorexit(void);
 void	execmd(char *argv, char **envar);
 void	print_usage(void);
+pid_t	g_lppid;
+void	handle_timeout(int sig);
 
 #endif
