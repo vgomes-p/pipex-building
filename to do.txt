@@ -1,0 +1,3 @@
+remover as funções que não estou usando mais
+resolver leak de memoria
+é isso
