@@ -1,0 +1,20 @@
+	int	stats;
+	time_t	initime;
+
+	initime = time(NULL);
+	while (1)
+	{
+		if (waitpid(lppid, &stats, WNOHANG) > 0)
+		{
+			if (WIFEXITED(stats) || WIFSIGNALED(stats))
+				break;
+		}
+
+		if (time(NULL) - initime >= 5)
+		{
+			kill(lppid, SIGKILL);
+			ft_putstr_fd("Error: Process timed out.\n", 2);
+			break;
+		}
+		usleep(1000);
+	}

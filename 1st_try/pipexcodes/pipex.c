@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **envar)
 		low_process(argv, envar, fd);
 	signal(SIGALRM, handle_timeout);
 	alarm(5);
-	if (waitpid(lppid, NULL, 0) == -1)
+	if (waitpid(lppid, NULL, WNOHANG) == -1)
 	{
 		ft_putstr_fd("Error: waitpid failed.\n", 2);
 		exit(EXIT_FAILURE);
