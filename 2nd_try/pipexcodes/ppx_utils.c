@@ -12,6 +12,7 @@
 
 #include "../includes/pipex.h"
 
+//function 00
 char	*getcmd_path(char *cmd, char **envar)
 {
 	char	**cmdpath;
@@ -41,12 +42,14 @@ char	*getcmd_path(char *cmd, char **envar)
 	return (0);
 }
 
+//function 01
 void	errorexit(void)
 {
 	perror("\033[31mError");
 	exit(EXIT_FAILURE);
 }
 
+//function 02
 void	execmd(char *argv, char **envar)
 {
 	char	**cmd;
@@ -75,18 +78,24 @@ void	execmd(char *argv, char **envar)
 		errorexit();
 }
 
+//function 03
 void	print_usage(void)
 {
 	ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
 	ft_putstr_fd("Usage: ./pipex <infile> <cmd1> <cmd2> <outfile>\n", 1);
 }
 
-int	open_file(char *fname, int flags)
-{
-	int	fd;
+// global var for low_process pid
+pid_t	g_lppid;
 
-	fd = open(fname, flags, 0777);
-	if (fd == -1)
-		errorexit();
-	return (fd);
+g_lppid = 0;
+
+//function 04
+void	handle_timeout(int sig)
+{
+	(void)sig;
+	if (g_lppid > 0)
+		kill(g_lppid, SIGKILL);
+	ft_putstr_fd("Error: Process time out.\n", 2);
+	exit(EXIT_FAILURE);
 }

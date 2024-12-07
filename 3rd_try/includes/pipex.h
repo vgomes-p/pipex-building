@@ -24,17 +24,21 @@
 # include "../libft/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
-int		open_file(char *fname, int flags);
+int		main(int argc, char **argv, char **envar);
+
+/* FUNCTIONS ON PPX_PROCESSES.C */
 void	low_process(char **argv, char **envar, int *fd);
 void	upper_process(char **argv, char **envar, int *fd);
-int		main(int argc, char **argv, char **envar);
+
+/* FUNCTIONS ON PPX_TIMEOUT.C */
+void	handle_timeout(int sig, siginfo_t *info, void *context);
+void	timeout_wait(pid_t lppid);
 
 /* FUNCTIONS ON PPX_UTILS.C */
 char	*getcmd_path(char *cmd, char **envar);
 void	errorexit(void);
 void	execmd(char *argv, char **envar);
 void	print_usage(void);
-pid_t	g_lppid;
-void	handle_timeout(int sig);
+int		open_file(char *fname, int flags);
 
 #endif

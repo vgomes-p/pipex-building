@@ -20,7 +20,7 @@ char	*getcmd_path(char *cmd, char **envar)
 	char	*partialpath;
 
 	ind = 0;
-	while (ft_strnstr(envar[ind], "PATH", 4) == 0)
+	while (envar[ind] && ft_strnstr(envar[ind], "PATH", 5) == 0)
 		ind++;
 	cmdpath = ft_split(envar[ind] + 5, ':');
 	ind = 0;
@@ -58,6 +58,14 @@ void	execmd(char *argv, char **envar)
 	finpath = getcmd_path(cmd[0], envar);
 	if (!finpath)
 	{
+		ft_putstr_fd("Error: Command not found. \n", 2);
+		while (cmd[++ind])
+			free(cmd[ind]);
+		free(cmd);
+		exit(EXIT_FAILURE);
+	}
+	if (!finpath)
+	{
 		while (cmd[++ind])
 			free(cmd[ind]);
 		free(cmd);
@@ -67,35 +75,18 @@ void	execmd(char *argv, char **envar)
 		errorexit();
 }
 
-int	get_next_line(char **line)
-{
-	char	*buff;
-	int		ind0;
-	int		ind1;
-	char	ch;
-
-	ind0 = 0;
-	ind1 = 0;
-	buff = (char *)malloc(10000);
-	if (!buff)
-		return (-1);
-	ind1 = read(0, &ch, 1);
-	while (ind1 && ch != '\n' && ch != '\0')
-	{
-		if (ch != '\n' && ch != '\0')
-			buff[ind0] = ch;
-		ind0++;
-		ind1 = read(0, &ch, 1);
-	}
-	buff[ind0] = '\n';
-	buff[++ind0] = '\0';
-	*line = buff;
-	free(buff);
-	return (ind1);
-}
-
 void	print_usage(void)
 {
 	ft_putstr_fd("\033[31mError: Incorrect number of arguments.\n\e[0m", 2);
 	ft_putstr_fd("Usage: ./pipex <infile> <cmd1> <cmd2> <outfile>\n", 1);
+}
+
+int	open_file(char *fname, int flags)
+{
+	int	fd;
+
+	fd = open(fname, flags, 0777);
+	if (fd == -1)
+		errorexit();
+	return (fd);
 }

@@ -20,7 +20,7 @@ H_SRCS		=	pipex.h
 H_DIR		=	includes/
 HEADER		=	$(addprefix $(H_DIR), $(H_SRCS))
 
-MAPA_SRCS	=	pipex.c ppx_processes.c ppx_timeout.c ppx_utils.c
+MAPA_SRCS	=	pipex.c ppx_utils.c
 MAPA_DIR	=	pipexcodes/
 OBJ_DIR		=	build/
 OBJ_M		=	$(addprefix $(OBJ_DIR), $(notdir $(MAPA:.c=.o)))
