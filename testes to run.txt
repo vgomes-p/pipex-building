@@ -1,0 +1,53 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    testes to run.txt                                  :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vgomes-p <vgomes-p@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/08 17:05:53 by vgomes-p          #+#    #+#              #
+#    Updated: 2024/12/08 17:07:14 by vgomes-p         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
+NESSE ARQUIVO CONTÉM 15 TESTES MANUAIS PARA O PIPEX.
+VOCê VAI PRECISAR DO ARQUIVO "infile" QUE ESTÁ NO MESMO
+MESMO REPOSITÓRIO DESSE ARQUIVO (procurar em github.com/vgomes-p)
+
+Nota: Pode usar o valgrind para conferir, só colocar na frente da chamada
+Nota: O infile tem 42 palavras
+
+    #TESTE 1 (FRANCINETTE)
+Francinette
+{levar em consideração só pipex-tester}
+
+    #TESTE 2 (MAKEFILE)
+make
+{conferir se o make da libft foi feito automaticamente e corretamente} 
+
+#BASE DOS TESTE: ./pipex file1 cmd1 cmd2 file2
+
+    #TESTE 3 (DEVE FUNCIONAR)
+./pipex Makefile "cat" "grep NAME" outfile_3_0 [pega o NAME do Makefile]
+./pipex infile "wc -l" "cat" outfile_3_1 [retorna o número de linhas do infile]
+./pipex infile "cat" "wc -w" outfile_3_2 [exibe a quantidade de palavras do infile]
+./pipex infile "ls -l" "cat" outfile_3_3 [lista os arquivos no diretorio atual]
+./pipex infile "ls" "wc -l" outfile_3_4 [conta o número de arquivos no diretorio]
+
+
+    #TESTE 4 (COMANDO NÃO ENCONTRADO)
+./pipex Makefile "cate" "grep NAME" outfile_ERROR_4_0
+./pipex Makefile "cat" "g" outfile_ERROR_4_1
+./pipex Makefile "c" "" outfile_ERROR_4_2
+
+    #TESTE 5 (ARGUMENTO VAZIO OU NULO)
+./pipex Makefile "" "grep NAME" outfile_ERROR_5_0
+./pipex Makefile "cat" "" outfile_ERROR_5_1
+./pipex Makefile "" "" outfile_ERROR_5_2
+
+    #TESTE 6 (ARQUIVO NÃO EXISTENTE)
+./pipex notexistthisfile "cat" "grep NAME" outfile_ERROR_6_0
+
+    #TESTE 7 (CLEAN)
+make fclean

@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vgomes-p <vgomes-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 14:35:14 by vgomes-p          #+#    #+#             */
-/*   Updated: 2024/12/04 14:35:14 by vgomes-p         ###   ########.fr       */
+/*   Created: 2024/11/07 12:55:16 by vgomes-p          #+#    #+#             */
+/*   Updated: 2024/11/07 12:55:16 by vgomes-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "libft.h"
 
-int	main(int argc, char **argv, char **envar)
+char	*ft_strchr(const char *str, int ch)
 {
-	int		fd[2];
-	pid_t	lppid;
-
-	if (argc != 5)
-	{
-		print_usage();
-		return (1);
-	}
-	if (pipe(fd) == -1)
-		errorexit();
-	lppid = fork();
-	if (lppid == -1)
-		errorexit();
-	if (lppid == 0)
-		low_process(argv, envar, fd);
-	waitpid(lppid, NULL, WNOHANG);
-	high_process(argv, envar, fd);
+	while (*str && *str != (char)ch)
+		str++;
+	if ((char)ch == *str)
+		return ((char *)str);
 	return (0);
 }

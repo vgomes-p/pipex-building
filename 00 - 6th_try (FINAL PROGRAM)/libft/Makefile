@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vgomes-p <vgomes-p@student.42.fr>          +#+  +:+       +#+         #
+#    By: vgomes-p <vgomes-p@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 12:57:14 by vgomes-p          #+#    #+#              #
-#    Updated: 2024/12/05 18:26:07 by vgomes-p         ###   ########.fr        #
+#    Updated: 2024/12/08 15:19:08 by vgomes-p         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME := libft.a
 
 SRCS := ft_bzero.c ft_calloc.c ft_memset.c ft_strnstr.c \
 	ft_strjoin.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
-	ft_split.c ft_putstr_fd.c
+	ft_split.c ft_strchr.c ft_strdup.c ft_putstr_fd.c
 
 OBJS := $(SRCS:.c=.o)
 

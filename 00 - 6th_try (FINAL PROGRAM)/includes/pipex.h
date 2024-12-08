@@ -22,22 +22,21 @@
 # include "../libft/libft.h"
 
 /* FUNCTIONS ON PIPEX.C */
-int			main(int argc, char **argv, char **envar);
+int		main(int argc, char **argv, char **envar);
 
 /* FUNCTIONS ON PPX_PROCESSES.C */
-int			open_file(char *fname, int flags);
-void		low_process(char **argv, char **envar, int *fd);
-void		high_process(char **argv, char **envar, int *fd);
+int		open_file(char *fname, int flags);
+void	low_process(char **argv, char **envar, int *fd);
+void	high_process(char **argv, char **envar, int *fd);
 
 /* FUNCTIONS ON PPX_PATH.C */
-void		freethe(char **cmdpath);
-static char	*findpath(char **envar);
-static char	*trypath(char *cmd, char *path);
-char		*getcmd_path(char *cmd, char **envar);
+void	freethe(char **cmdpath);
+char	*getcmd_path(char *cmd, char **envar);
 
 /* FUNCTIONS ON PPX_UTILS.C */
-void		errorexit(void);
-void		execmd(char *argv, char **envar);
-void		print_usage(void);
+void	errorexit(void);
+void	execmd(char *argv, char **envar);
+void	print_usage(void);
+int		emptycmd(const char *str);
 
 #endif
