@@ -30,6 +30,6 @@ int	main(int argc, char **argv, char **envar)
 	if (lppid == 0)
 		low_process(argv, envar, fd);
 	waitpid(lppid, NULL, WNOHANG);
-	upper_process(argv, envar, fd);
+	high_process(argv, envar, fd);
 	return (0);
 }

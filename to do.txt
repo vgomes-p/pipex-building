@@ -1,3 +1,16 @@
-remover as funções que não estou usando mais
-resolver leak de memoria
-é isso
+a tratar:
+	se a entrada for /0 retornar nulo
+
+
+TESTES:
+valgrind ./pipex Makefile "cat" "grep NAME" outfile
+valgrind ./pipex Makefile "cate" "grep NAME" outfile
+valgrind ./pipex Makefile "" "grep NAME" outfile
+valgrind ./pipex Makefile "cat" "g" outfile 
+valgrind ./pipex Makefile "c" "" outfile
+
+Para depurar com Valgrind  e entender melhor o comportamento dos descritores de arquivos no pipex, podemos usar as flags
+    --track-fds=yes: Monitora os descritores de arquivos.
+    --trace-children=yes: Rastreia processos filhos.
+    --log-file=<filename>: Salva o relatório em um arquivo.
+    --leak-check=full e --show-leak-kinds=all: Verificam vazamentos de memória detalhadamente.

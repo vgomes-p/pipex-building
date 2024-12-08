@@ -27,7 +27,7 @@ int			main(int argc, char **argv, char **envar);
 /* FUNCTIONS ON PPX_PROCESSES.C */
 int			open_file(char *fname, int flags);
 void		low_process(char **argv, char **envar, int *fd);
-void		upper_process(char **argv, char **envar, int *fd);
+void		high_process(char **argv, char **envar, int *fd);
 
 /* FUNCTIONS ON PPX_PATH.C */
 void		freethe(char **cmdpath);

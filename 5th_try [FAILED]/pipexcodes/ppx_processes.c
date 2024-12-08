@@ -6,7 +6,7 @@
 /*   By: vgomes-p <vgomes-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:25:08 by vgomes-p          #+#    #+#             */
-/*   Updated: 2024/12/07 23:57:16 by vgomes-p         ###   ########.fr       */
+/*   Updated: 2024/12/08 02:47:59 by vgomes-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	low_process(char **argv, char **envar, int *fd)
 	execmd(argv[2], envar);
 }
 
-void	upper_process(char **argv, char **envar, int *fd)
+void	high_process(char **argv, char **envar, int *fd)
 {
 	int		outfile;
 

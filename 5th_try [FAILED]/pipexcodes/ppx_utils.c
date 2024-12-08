@@ -14,7 +14,7 @@
 
 void	errorexit(void)
 {
-	perror("\033[31mError");
+	perror("\033[31mError![0m");
 	exit(EXIT_FAILURE);
 }
 
